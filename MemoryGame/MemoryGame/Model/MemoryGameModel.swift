@@ -1,26 +1,43 @@
 import Foundation
 
-struct MemoryGameModel<CardContent> {
+struct MemoryGameModel<CardContent> where CardContent: Equatable {
     
     var cards: Array<Card>
     
-    mutating func choose(card: Card){
-        if let chosenIndex = index(of: card) {
-            cards[chosenIndex].isFaceUp = !card.isFaceUp
+    private var indexOfFaceUpCard: Int? {
+        get{
+            cards.indices.filter { cards[$0].isFaceUp }.only // $0 -> erstes Paramter von .filter - Funktion
+                // .only -> Extenion Funktion von Array
         }
-        print("card chosen: \(card)")
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
     }
     
-    private func index(of card: Card) -> Int?{
-           for index in 0..<cards.count {
-               if self.cards[index].id ==
-                   card.id {
-                   return index
-               }
-           }
-           return nil // --> 'null'
-       }
-    
+    mutating func choose(card: Card){
+        print("card chosen: \(card)")
+        
+        if let chosenIndex = cards.firstIndex(matching: card),
+           !cards[chosenIndex].isFaceUp,
+           !cards[chosenIndex].isMatched
+        { // alle Bedingungen true für if - Block (Karte darf nicht faceUp & matched sein
+            if let potentialMatchIndex = indexOfFaceUpCard {
+                // Match?
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content { // Card content muss vergleichbar sein -> CardContent: Equatable
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                self.cards[chosenIndex].isFaceUp = true
+            }
+            // kein Match
+            else {
+                indexOfFaceUpCard = chosenIndex
+            }
+        }
+    }
+        
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
         for pairIndex in 0..<numberOfPairsOfCards {
@@ -32,7 +49,7 @@ struct MemoryGameModel<CardContent> {
     }
     
     struct Card: Identifiable { // implementieret Identifiable protocol, damit durch Cards iterieret werden kann
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
