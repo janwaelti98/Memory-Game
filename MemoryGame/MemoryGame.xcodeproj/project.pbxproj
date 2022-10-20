@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C180509290176BB0085E23F /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C180508290176BB0085E23F /* Cardify.swift */; };
+		6C18050B290177A70085E23F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18050A290177A70085E23F /* CardView.swift */; };
+		6C18050D29017A350085E23F /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18050C29017A350085E23F /* Pie.swift */; };
+		6C49CE78290ABCA9003F4C5B /* MemoryGameFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49CE77290ABCA9003F4C5B /* MemoryGameFactory.swift */; };
 		6C7EBB8628F8411800D791D7 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBB8528F8411800D791D7 /* Array.swift */; };
+		6CE1C80628F99A2300522B23 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE1C80528F99A2300522B23 /* SheetView.swift */; };
 		A7F106A128CF503D00C29BB1 /* MemoryGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F106A028CF503D00C29BB1 /* MemoryGameApp.swift */; };
 		A7F106A528CF503E00C29BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F106A428CF503E00C29BB1 /* Assets.xcassets */; };
 		A7F106A828CF503E00C29BB1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F106A728CF503E00C29BB1 /* Preview Assets.xcassets */; };
@@ -17,7 +22,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C180508290176BB0085E23F /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
+		6C18050A290177A70085E23F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		6C18050C29017A350085E23F /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		6C49CE77290ABCA9003F4C5B /* MemoryGameFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameFactory.swift; sourceTree = "<group>"; };
 		6C7EBB8528F8411800D791D7 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		6CE1C80528F99A2300522B23 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		A7F1069D28CF503D00C29BB1 /* MemoryGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F106A028CF503D00C29BB1 /* MemoryGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameApp.swift; sourceTree = "<group>"; };
 		A7F106A428CF503E00C29BB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +68,10 @@
 			isa = PBXGroup;
 			children = (
 				A7F106B228CF50FD00C29BB1 /* MemoryGameView.swift */,
+				6CE1C80528F99A2300522B23 /* SheetView.swift */,
+				6C180508290176BB0085E23F /* Cardify.swift */,
+				6C18050A290177A70085E23F /* CardView.swift */,
+				6C18050C29017A350085E23F /* Pie.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -96,6 +110,7 @@
 				A7F106A028CF503D00C29BB1 /* MemoryGameApp.swift */,
 				A7F106A428CF503E00C29BB1 /* Assets.xcassets */,
 				A7F106A628CF503E00C29BB1 /* Preview Content */,
+				6C49CE77290ABCA9003F4C5B /* MemoryGameFactory.swift */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -179,9 +194,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7F106AF28CF50DC00C29BB1 /* EmojiMemoryGameViewModel.swift in Sources */,
+				6C180509290176BB0085E23F /* Cardify.swift in Sources */,
 				6C7EBB8628F8411800D791D7 /* Array.swift in Sources */,
+				6C18050D29017A350085E23F /* Pie.swift in Sources */,
 				A7F106B128CF50F400C29BB1 /* MemoryGameModel.swift in Sources */,
+				6C49CE78290ABCA9003F4C5B /* MemoryGameFactory.swift in Sources */,
 				A7F106B328CF50FD00C29BB1 /* MemoryGameView.swift in Sources */,
+				6CE1C80628F99A2300522B23 /* SheetView.swift in Sources */,
+				6C18050B290177A70085E23F /* CardView.swift in Sources */,
 				A7F106A128CF503D00C29BB1 /* MemoryGameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

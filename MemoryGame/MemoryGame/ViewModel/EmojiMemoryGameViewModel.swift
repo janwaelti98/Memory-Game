@@ -2,18 +2,13 @@ import Foundation
 
 class EmojiMemoryGameViewModel: ObservableObject {
     
-    init() {
-        model = EmojiMemoryGameViewModel.createMemoryGame()
-    }
-    
-    
     @Published private var model: MemoryGameModel<String>
+    private var factory = MemoryGameFactory()
+    public var chosenCardDeck = CardDeck.food
     
-    static func createMemoryGame()->MemoryGameModel<String>{
-        let emojiis: Array<String> = ["🙈", "🙉", "🙊", "🦁", "🐮", "🐷", "🐸", "🐒", "🐔", "🐧", "🐦", "🐤", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🪱", "🐛", "🦋", "🐌", "🐞", "🐜", "🪰", "🪲", "🪳", "🦟", "🦗", "🕷", "🦂", "🐢", "🐍", "🦎", "🦖"]
-        return  MemoryGameModel<String>(numberOfPairsOfCards: emojiis.count, cardContentFactory: { pairIndex in
-            return emojiis[pairIndex]
-        })
+    
+    init() {
+        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck)
     }
     
     // MARK: - Access to the Model
@@ -24,5 +19,9 @@ class EmojiMemoryGameViewModel: ObservableObject {
     // MARK: - Intents
     func choose(card: MemoryGameModel<String>.Card) {
         model.choose(card: card)
+    }
+    
+    func startGame(chosenCardDeck: CardDeck) {
+        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck)
     }
 }

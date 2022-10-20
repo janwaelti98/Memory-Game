@@ -3,6 +3,7 @@ import Foundation
 struct MemoryGameModel<CardContent> where CardContent: Equatable {
     
     var cards: Array<Card>
+    //var chosenCardDeck: MemoryGameFactory.CardDeck
     
     private var indexOfFaceUpCard: Int? {
         get{
@@ -55,4 +56,3 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable {
         var id: Int
     }
 }
-
