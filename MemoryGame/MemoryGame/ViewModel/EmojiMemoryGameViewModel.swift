@@ -10,7 +10,14 @@ class EmojiMemoryGameViewModel: ObservableObject {
     @Published private var model: MemoryGameModel<String>
     
     static func createMemoryGame()->MemoryGameModel<String>{
-        let emojiis: Array<String> = ["🙈", "🙉", "🙊", "🦁", "🐮", "🐷", "🐸", "🐒", "🐔", "🐧", "🐦", "🐤", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🪱", "🐛", "🦋", "🐌", "🐞", "🐜", "🪰", "🪲", "🪳", "🦟", "🦗", "🕷", "🦂", "🐢", "🐍", "🦎", "🦖"]
+        let emojiis: Array<String> = ["🙈", "🙉", "🙊", "🦁", "🐮", "🐷",
+                                      "🐸", "🐒", "🐔", "🐧", "🐦", "🐤",
+                                      "🦆", "🦅", "🦉", "🦇", "🐺", "🐗",
+                                      "🐴", "🦄", "🐝", "🪱", "🐛", "🦋",
+                                      "🐌", "🐞", "🐜", "🪰", "🪲", "🪳",
+                                      "🦟", "🦗", "🕷", "🦂", "🐢", "🐍",
+                                      "🦎", "🦖"]
+        
         return  MemoryGameModel<String>(numberOfPairsOfCards: emojiis.count, cardContentFactory: { pairIndex in
             return emojiis[pairIndex]
         })
