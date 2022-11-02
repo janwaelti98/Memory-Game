@@ -23,19 +23,23 @@ struct SheetView: View {
                     SubTitle(title: "Card Deck")
                 
                     CardDeckMenuItem(name: "Food", icon: "🍉", color: Color.green).onTapGesture {
-                        viewModel.startGame(chosenCardDeck: CardDeck.food, chosenLevel: segmentationSelection)
+                        withAnimation(.easeInOut(duration: 0.6).delay(0.1)) {
+                            viewModel.startGame(chosenCardDeck: CardDeck.food, chosenLevel: segmentationSelection)
+                        }
                         dismiss()
                     }
                     CardDeckMenuItem(name: "Animals", icon: "🐱", color: Color.blue).onTapGesture {
-                        viewModel.startGame(chosenCardDeck: CardDeck.animal, chosenLevel: segmentationSelection)
+                        withAnimation(.easeInOut.delay(0.1)) {
+                            viewModel.startGame(chosenCardDeck: CardDeck.animal, chosenLevel: segmentationSelection)
+                        }
                         dismiss()
                     }
                     CardDeckMenuItem(name: "Shapes", icon: "🔺", color: Color.red).onTapGesture {
-                        //viewModel.startGame(chosenCardDeck: CardDeck.animal, chosenLevel: segmentationSelection))
+                        // TODO:
                     }
                 }
             }
-               .navigationBarTitle(Text("Start new game"), displayMode: .inline)
+               .navigationBarTitle(Text("New game"), displayMode: .inline)
                    .navigationBarItems(trailing: Button(action: {
                        dismiss()
                    }) {
