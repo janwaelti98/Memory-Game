@@ -4,14 +4,14 @@ struct SheetView: View {
     var viewModel: EmojiMemoryGameViewModel
     
     @Environment(\.dismiss) var dismiss
-    @State var segmentationSelection : Level = .easy
+    @State var chosenLevel : Level = .medium
     
     var body: some View {
         NavigationView {
             Group {
                 VStack() {
                     SubTitle(title: "Level")
-                    Picker("", selection: $segmentationSelection) {
+                    Picker("", selection: $chosenLevel) {
                         ForEach(Level.allCases, id: \.self) { option in
                             Text(option.rawValue)
                         }
@@ -24,13 +24,13 @@ struct SheetView: View {
                 
                     CardDeckMenuItem(name: "Food", icon: "🍉", color: Color.green).onTapGesture {
                         withAnimation(.easeInOut(duration: 0.6).delay(0.1)) {
-                            viewModel.startGame(chosenCardDeck: CardDeck.food, chosenLevel: segmentationSelection)
+                            viewModel.startGame(chosenCardDeck: CardDeck.food, chosenLevel: chosenLevel)
                         }
                         dismiss()
                     }
                     CardDeckMenuItem(name: "Animals", icon: "🐱", color: Color.blue).onTapGesture {
                         withAnimation(.easeInOut.delay(0.1)) {
-                            viewModel.startGame(chosenCardDeck: CardDeck.animal, chosenLevel: segmentationSelection)
+                            viewModel.startGame(chosenCardDeck: CardDeck.animal, chosenLevel: chosenLevel)
                         }
                         dismiss()
                     }
