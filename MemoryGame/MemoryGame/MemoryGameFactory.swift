@@ -1,49 +1,53 @@
 import Foundation
 
+enum CardDeck {
+    case animal
+    case food
+}
+
+enum Level : String, CaseIterable {
+    case easy = "easy"
+    case medium = "medium"
+    case hard = "hard"
+}
+
 class MemoryGameFactory {
     
     init() {}
     
+    
+    let animals: Array<String> = ["🙈", "🙉", "🙊", "🦁", "🐮", "🐷",
+                                  "🐸", "🐒", "🐔", "🐧", "🐦", "🐤",
+                                  "🦆", "🦅", "🦉", "🦇", "🐺", "🐗",
+                                  "🐴", "🦄", "🐝", "🪱", "🐛", "🦋",
+                                  "🐌", "🐞", "🐜", "🪰", "🪲", "🪳",
+                                  "🦟", "🦗", "🕷", "🦂", "🐢", "🐍",
+                                  "🦎", "🦖"]
+    
+    let food: Array<String> = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌",
+                               "🍉", "🍇", "🍓", "🫐", "🍈", "🍒",
+                               "🍑", "🥭", "🍍", "🥥", "🥝", "🍅",
+                               "🍆", "🥑", "🥦", "🥬", "🥒", "🌶",
+                               "🫑", "🌽", "🥕", "🫒", "🧄", "🧅",
+                               "🥔", "🍠", "🫑", "🌽"]
+     
     func createMemoryGame(chosenCardDeck: CardDeck, chosenLevel: Level) -> MemoryGameModel<String> {
         switch chosenCardDeck {
         case .animal:
-            return createAnimals(chosenLevel: chosenLevel)
+            return createEmoijMemoryGame(chosenLevel: chosenLevel, emoijSet: animals)
         case .food:
-            return createFood(chosenLevel: chosenLevel)
+            return createEmoijMemoryGame(chosenLevel: chosenLevel, emoijSet: food)
         }
     }
     
-    func createAnimals(chosenLevel: Level) -> MemoryGameModel<String>{
-        let animals: Array<String> = ["🙈", "🙉", "🙊", "🦁", "🐮", "🐷",
-                                      "🐸", "🐒", "🐔", "🐧", "🐦", "🐤",
-                                      "🦆", "🦅", "🦉", "🦇", "🐺", "🐗",
-                                      "🐴", "🦄", "🐝", "🪱", "🐛", "🦋",
-                                      "🐌", "🐞", "🐜", "🪰", "🪲", "🪳",
-                                      "🦟", "🦗", "🕷", "🦂", "🐢", "🐍",
-                                      "🦎", "🦖"]
+    func createEmoijMemoryGame<T>(chosenLevel: Level, emoijSet: Array<T>) -> MemoryGameModel<T> {
+        let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: emoijSet.count)
         
-        let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: animals.count)
-        
-        return MemoryGameModel<String>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
-            return animals[pairIndex]
+        return MemoryGameModel<T>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
+            return emoijSet[pairIndex]
         })
     }
-    
-    func createFood(chosenLevel: Level) -> MemoryGameModel<String>{
-        let food: Array<String> = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌",
-                                   "🍉", "🍇", "🍓", "🫐", "🍈", "🍒",
-                                   "🍑", "🥭", "🍍", "🥥", "🥝", "🍅",
-                                   "🍆", "🥑", "🥦", "🥬", "🥒", "🌶",
-                                   "🫑", "🌽", "🥕", "🫒", "🧄", "🧅",
-                                   "🥔", "🍠", "🫑", "🌽"]
-        
-        let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: food.count)
-        
-        return MemoryGameModel<String>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
-            return food[pairIndex]
-        })
-    }
-    
+
     func getAmountOfPairs(chosenLevel: Level, cardCount: Int) -> Int {
         switch chosenLevel {
         case .easy:
@@ -54,16 +58,4 @@ class MemoryGameFactory {
             return cardCount - 10
         }
     }
-
-}
-
-enum CardDeck {
-    case animal
-    case food
-}
-
-enum Level : String, CaseIterable {
-    case easy = "easy"
-    case medium = "medium"
-    case hard = "hard"
 }
