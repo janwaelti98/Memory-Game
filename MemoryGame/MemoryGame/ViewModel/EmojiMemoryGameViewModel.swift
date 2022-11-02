@@ -4,9 +4,9 @@ class EmojiMemoryGameViewModel: ObservableObject {
     
     @Published private var model: MemoryGameModel<String>
     private var factory = MemoryGameFactory()
-    public var chosenCardDeck = CardDeck.food
+    public var chosenCardDeck = CardDeck.food // default is the food deck
     
-    
+
     init() {
         model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck)
     }

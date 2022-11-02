@@ -1,25 +1,41 @@
 import SwiftUI
 
 struct SheetView: View {
-    @Environment(\.dismiss) var dismiss
     var viewModel: EmojiMemoryGameViewModel
-
+    
+    @Environment(\.dismiss) var dismiss
+    @State var segmentationSelection : Level = .easy
+    
     var body: some View {
         NavigationView {
-            VStack(spacing: 20){
-                CardDeckMenuItem(name: "Food", icon: "🍉", color: Color.green).onTapGesture {
-                    viewModel.startGame(chosenCardDeck: CardDeck.food)
-                    dismiss()
+            Group {
+                VStack() {
+                    SubTitle(title: "Level")
+                    Picker("", selection: $segmentationSelection) {
+                        ForEach(Level.allCases, id: \.self) { option in
+                            Text(option.rawValue)
+                        }
+                    }.pickerStyle(SegmentedPickerStyle()).padding()
                 }
-                CardDeckMenuItem(name: "Animals", icon: "🐱", color: Color.blue).onTapGesture {
-                    viewModel.startGame(chosenCardDeck: CardDeck.animal)
-                    dismiss()
-                }
-                CardDeckMenuItem(name: "Shapes", icon: "🔺", color: Color.red).onTapGesture {
-                    //viewModel.startGame(chosenCardDeck: CardDeck.animal)
+                Spacer(minLength: 50)
+                
+                VStack(){
+                    SubTitle(title: "Card Deck")
+                
+                    CardDeckMenuItem(name: "Food", icon: "🍉", color: Color.green).onTapGesture {
+                        viewModel.startGame(chosenCardDeck: CardDeck.food)
+                        dismiss()
+                    }
+                    CardDeckMenuItem(name: "Animals", icon: "🐱", color: Color.blue).onTapGesture {
+                        viewModel.startGame(chosenCardDeck: CardDeck.animal)
+                        dismiss()
+                    }
+                    CardDeckMenuItem(name: "Shapes", icon: "🔺", color: Color.red).onTapGesture {
+                        //viewModel.startGame(chosenCardDeck: CardDeck.animal)
+                    }
                 }
             }
-               .navigationBarTitle(Text("Choose card deck"), displayMode: .inline)
+               .navigationBarTitle(Text("Start new game"), displayMode: .inline)
                    .navigationBarItems(trailing: Button(action: {
                        dismiss()
                    }) {
@@ -49,6 +65,18 @@ struct CardDeckMenuItem: View {
         .padding(.horizontal)
         .aspectRatio(3/1, contentMode: .fit)
     }
+}
+
+struct SubTitle: View {
+  let title: String
+
+  var body: some View {
+    Text(title)
+      .font(.title)
+      .fontWeight(.bold)
+      .padding()
+      .frame(maxWidth: .infinity, alignment: .leading)
+  }
 }
 
 

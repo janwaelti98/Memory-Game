@@ -2,11 +2,7 @@ import Foundation
 
 class MemoryGameFactory {
     
-    //public var chosenCardDeck: CardDeck
-    
-    init() {
-        // TODO ???
-    }
+    init() {}
     
     func createMemoryGame(chosenCardDeck: CardDeck) -> MemoryGameModel<String> {
         switch chosenCardDeck {
@@ -46,8 +42,13 @@ class MemoryGameFactory {
 
 }
 
-
 enum CardDeck {
     case animal
     case food
+}
+
+enum Level : String, CaseIterable {
+    case easy = "easy"
+    case medium = "medium"
+    case hard = "hard"
 }
