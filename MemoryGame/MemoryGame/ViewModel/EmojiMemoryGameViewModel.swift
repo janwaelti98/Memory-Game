@@ -4,11 +4,9 @@ class EmojiMemoryGameViewModel: ObservableObject {
     
     @Published private var model: MemoryGameModel<String>
     private var factory = MemoryGameFactory()
-    public var chosenCardDeck = CardDeck.food // default is the food deck
-    
 
     init() {
-        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck)
+        model = factory.createMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy)
     }
     
     // MARK: - Access to the Model
@@ -21,7 +19,7 @@ class EmojiMemoryGameViewModel: ObservableObject {
         model.choose(card: card)
     }
     
-    func startGame(chosenCardDeck: CardDeck) {
-        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck)
+    func startGame(chosenCardDeck: CardDeck, chosenLevel: Level) {
+        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck, chosenLevel: chosenLevel)
     }
 }

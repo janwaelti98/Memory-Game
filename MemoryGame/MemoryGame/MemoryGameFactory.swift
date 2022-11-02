@@ -4,16 +4,16 @@ class MemoryGameFactory {
     
     init() {}
     
-    func createMemoryGame(chosenCardDeck: CardDeck) -> MemoryGameModel<String> {
+    func createMemoryGame(chosenCardDeck: CardDeck, chosenLevel: Level) -> MemoryGameModel<String> {
         switch chosenCardDeck {
         case .animal:
-            return createAnimals()
+            return createAnimals(chosenLevel: chosenLevel)
         case .food:
-            return createFood()
+            return createFood(chosenLevel: chosenLevel)
         }
     }
     
-    func createAnimals()->MemoryGameModel<String>{
+    func createAnimals(chosenLevel: Level) -> MemoryGameModel<String>{
         let animals: Array<String> = ["🙈", "🙉", "🙊", "🦁", "🐮", "🐷",
                                       "🐸", "🐒", "🐔", "🐧", "🐦", "🐤",
                                       "🦆", "🦅", "🦉", "🦇", "🐺", "🐗",
@@ -22,12 +22,14 @@ class MemoryGameFactory {
                                       "🦟", "🦗", "🕷", "🦂", "🐢", "🐍",
                                       "🦎", "🦖"]
         
-        return MemoryGameModel<String>(numberOfPairsOfCards: animals.count, cardContentFactory: { pairIndex in
+        let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: animals.count)
+        
+        return MemoryGameModel<String>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
             return animals[pairIndex]
         })
     }
     
-    func createFood()->MemoryGameModel<String>{
+    func createFood(chosenLevel: Level) -> MemoryGameModel<String>{
         let food: Array<String> = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌",
                                    "🍉", "🍇", "🍓", "🫐", "🍈", "🍒",
                                    "🍑", "🥭", "🍍", "🥥", "🥝", "🍅",
@@ -35,9 +37,22 @@ class MemoryGameFactory {
                                    "🫑", "🌽", "🥕", "🫒", "🧄", "🧅",
                                    "🥔", "🍠", "🫑", "🌽"]
         
-        return MemoryGameModel<String>(numberOfPairsOfCards: food.count, cardContentFactory: { pairIndex in
+        let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: food.count)
+        
+        return MemoryGameModel<String>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
             return food[pairIndex]
         })
+    }
+    
+    func getAmountOfPairs(chosenLevel: Level, cardCount: Int) -> Int {
+        switch chosenLevel {
+        case .easy:
+            return cardCount - 30
+        case .medium:
+            return cardCount - 20
+        case .hard:
+            return cardCount - 10
+        }
     }
 
 }
