@@ -4,10 +4,14 @@ import SwiftUI
 class EmojiMemoryGameViewModel: ObservableObject {
     
     @Published private var model: MemoryGameModel<String>
+    
+    @Published public var currentScore: Int
+                                                            
     private var factory = MemoryGameFactory()
 
     init() {
         model = factory.createMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy, deviceHeight: UIScreen.main.bounds.width)
+        currentScore = factory.createMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy, deviceHeight: UIScreen.main.bounds.width).score
     }
     
     // MARK: - Access to the Model

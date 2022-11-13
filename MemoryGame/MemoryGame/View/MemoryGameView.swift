@@ -8,7 +8,9 @@ struct MemoryGameView: View {
     @State
     private var showingSheet = true
     
+    
     var body: some View {
+        Text("Score: \(viewModel.currentScore)")
         VStack{
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: minimumColumnWidth))]) {
