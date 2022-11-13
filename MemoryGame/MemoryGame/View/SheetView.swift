@@ -38,6 +38,7 @@ struct SheetView: View {
                         // TODO:
                     }
                 }
+                Spacer(minLength: 50)
             }
                .navigationBarTitle(Text("New game"), displayMode: .inline)
                    .navigationBarItems(trailing: Button(action: {

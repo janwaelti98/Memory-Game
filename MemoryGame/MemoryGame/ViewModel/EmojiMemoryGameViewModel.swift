@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 class EmojiMemoryGameViewModel: ObservableObject {
     
@@ -6,7 +7,7 @@ class EmojiMemoryGameViewModel: ObservableObject {
     private var factory = MemoryGameFactory()
 
     init() {
-        model = factory.createMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy)
+        model = factory.createMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy, deviceHeight: UIScreen.main.bounds.width)
     }
     
     // MARK: - Access to the Model
@@ -20,6 +21,6 @@ class EmojiMemoryGameViewModel: ObservableObject {
     }
     
     func startGame(chosenCardDeck: CardDeck, chosenLevel: Level) {
-        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck, chosenLevel: chosenLevel)
+        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck, chosenLevel: chosenLevel, deviceHeight: UIScreen.main.bounds.height)
     }
 }
