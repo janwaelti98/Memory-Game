@@ -3,23 +3,26 @@ import SwiftUI
 struct MemoryGameView: View {
     
     @ObservedObject
-    var viewModel: EmojiMemoryGameViewModel
+    var emoijViewModel: EmojiMemoryGameViewModel
+    
+    @ObservedObject
+    var shapeViewModel: ShapeMemoryGameViewModel
     
     @State
     private var showingSheet = true
     
     
     var body: some View {
-        Text("Score: \(viewModel.currentScore)")
+        Text("Score: \(emoijViewModel.currentScore)")
         VStack{
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: minimumColumnWidth))]) {
-                    ForEach(viewModel.cards){ card in
+                    ForEach(emoijViewModel.cards){ card in
                         CardView(card: card)
                             .aspectRatio(cardAspectRatio, contentMode: .fit)
                             .onTapGesture {
                                 withAnimation(.linear(duration: rotationDuration)) {
-                                    self.viewModel.choose(card: card)
+                                    self.emoijViewModel.choose(card: card)
                                 }
                         }
                     }
@@ -30,7 +33,7 @@ struct MemoryGameView: View {
                     showingSheet.toggle()
                 }
                 .sheet(isPresented: $showingSheet) {
-                    SheetView(viewModel: viewModel)
+                    SheetView(viewModel: emoijViewModel)
                 }
     }
     // MARK: - Drawing Constants
@@ -41,8 +44,12 @@ struct MemoryGameView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let game = EmojiMemoryGameViewModel()
-        game.choose(card: game.cards[0])
-        return MemoryGameView(viewModel: game)
+        let emoijGame = EmojiMemoryGameViewModel()
+        let shapeGame = ShapeMemoryGameViewModel()
+        
+        emoijGame.choose(card: emoijGame.cards[0])
+        //shapeGame.choose(card: shapeGame.cards[0])
+        
+        return MemoryGameView(emoijViewModel: emoijGame, shapeViewModel: shapeGame)
     }
 }

@@ -3,7 +3,8 @@ import SwiftUI
 struct MemoryGameApp: App {
     var body: some Scene {
         WindowGroup {
-            MemoryGameView(viewModel: EmojiMemoryGameViewModel())
+            MemoryGameView(emoijViewModel: EmojiMemoryGameViewModel(),
+                           shapeViewModel: ShapeMemoryGameViewModel())
         }
     }
 }

@@ -3,6 +3,7 @@ import Foundation
 enum CardDeck {
     case animal
     case food
+    //case shape
 }
 
 enum Level : String, CaseIterable {
@@ -29,6 +30,8 @@ class MemoryGameFactory {
                                "🍆", "🥑", "🥦", "🥬", "🥒", "🌶",
                                "🫑", "🌽", "🥕", "🫒", "🧄", "🧅",
                                "🥔", "🍠", "🫑", "🌽"]
+    
+    // let shapes: Array<Shape> []
      
     func createMemoryGame(chosenCardDeck: CardDeck, chosenLevel: Level, deviceHeight: CGFloat) -> MemoryGameModel<String> {
         switch chosenCardDeck {
@@ -46,6 +49,8 @@ class MemoryGameFactory {
             return emoijSet[pairIndex]
         })
     }
+    
+    
 
     func getAmountOfPairs(chosenLevel: Level, cardCount: Int, deviceHeight: CGFloat) -> Int {
         var pairs: Int
