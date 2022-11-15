@@ -4,9 +4,8 @@ import SwiftUI
 
 
 struct HeartShape: Shape, Equatable {
-    //var fillColor: Color
-    //var lineThickness: Int
-    //var lineColor: Color
+    var fillColor: Color
+    var lineThickness: Int
     
     func path(in rect: CGRect) -> Path {
         let size = min(rect.width, rect.height)
@@ -16,7 +15,7 @@ struct HeartShape: Shape, Equatable {
         func offsetPoint(p: CGPoint) -> CGPoint {
             return CGPoint(x: p.x + xOffset, y: p.y+yOffset)
         }
-        var path = Path()/*.strokedPath(StrokeStyle.init(lineWidth: CGFloat(lineThickness)))*/
+        var path = Path().strokedPath(StrokeStyle.init(lineWidth: CGFloat(lineThickness)))
 
         path.move(to: offsetPoint(p: (CGPoint(x: (size * 0.50), y: (size * 0.25)))))
         path.addCurve(to: offsetPoint(p: CGPoint(x: 0, y: (size * 0.25))),
@@ -32,7 +31,7 @@ struct HeartShape: Shape, Equatable {
                       control1: offsetPoint(p: CGPoint(x: size, y: 0)),
                       control2: offsetPoint(p: CGPoint(x: (size * 0.50), y: (-size * 0.10))))
         
-        return path/*.fill(fillColor) as! Path*/
+        return path.fill(fillColor) as! Path
     }
     
     static func == (lhs: HeartShape, rhs: HeartShape) -> Bool {
@@ -42,8 +41,8 @@ struct HeartShape: Shape, Equatable {
 
 struct RegularPolygonShape: Shape, Equatable {
     var sides:Int
-    //var fillColor: Color
-    //var lineThickness: Int
+    var fillColor: Color
+    var lineThickness: Int
 
     func path(in rect: CGRect) -> Path {
         let center = CGPoint(x: rect.midX, y: rect.midY)
@@ -55,7 +54,7 @@ struct RegularPolygonShape: Shape, Equatable {
             // Move the point relative to the center of the rect and add to vertices
             vertices.append(CGPoint(x: pt.x + center.x, y: pt.y + center.y))
         }
-        var path = Path()/*.strokedPath(StrokeStyle.init(lineWidth: CGFloat(lineThickness)))*/
+        var path = Path().strokedPath(StrokeStyle.init(lineWidth: CGFloat(lineThickness)))
         
         for (n, pt) in vertices.enumerated() {
             print("\(n)   vertices.append(CGPoint(x: \(pt.x), y:\(pt.y)))")
@@ -63,7 +62,7 @@ struct RegularPolygonShape: Shape, Equatable {
         }
         path.closeSubpath()
         
-        return path/*.fill(fillColor) as! Path*/
+        return path.fill(fillColor) as! Path
     }
     
     func Cartesian(length:Double, angle:Double) -> CGPoint {
@@ -76,15 +75,18 @@ struct RegularPolygonShape: Shape, Equatable {
 }
 
 struct CircleShape: Shape, Equatable {
+    var fillColor: Color
+    var lineThickness: Int
+    
     func path(in rect: CGRect) -> Path {
         
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = min(rect.width, rect.height) / 2
-        var path = Path()
+        var path = Path().strokedPath(StrokeStyle.init(lineWidth: CGFloat(lineThickness)))
         
         path.addArc(center: center, radius: radius, startAngle: Angle(degrees: 0.0), endAngle: Angle(degrees: 360.0), clockwise: true)
         
-        return path
+        return path.fill(fillColor) as! Path
     }
     
     static func == (lhs: CircleShape, rhs: CircleShape) -> Bool {
@@ -105,9 +107,9 @@ extension Shape where Self : Equatable {
 struct Shape_Previews: PreviewProvider {
     static var previews: some View {
         VStack() {
-            HeartShape().foregroundColor(.red)
-            RegularPolygonShape(sides: 5).foregroundColor(.orange)
-            CircleShape().stroke(lineWidth: 6).foregroundColor(.green)
+            HeartShape(fillColor: Color.red, lineThickness: 2)
+            RegularPolygonShape(sides: 5, fillColor: Color.blue, lineThickness: 1)
+            CircleShape(fillColor: Color.yellow, lineThickness: 3)
         }
     }
 }

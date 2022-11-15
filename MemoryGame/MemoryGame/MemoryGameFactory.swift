@@ -34,8 +34,12 @@ class MemoryGameFactory {
     
     
     func createShapes() -> Array<any Shape> {
-        let numberOfSites = Int.random(in: 1...6)
-        let shapes: Array<any Shape> = [CircleShape(), RegularPolygonShape(sides: numberOfSites), HeartShape()]
+        let randomColor = [Color.yellow, Color.green, Color.red, Color.blue, Color.orange].randomElement()!
+        let randomNumberOfSites = Int.random(in: 1...6)
+        let randomLineThickness = Int.random(in: 1...6)
+        
+        let shapes: Array<any Shape> = [CircleShape(fillColor: randomColor, lineThickness: randomLineThickness), RegularPolygonShape(sides: randomNumberOfSites, fillColor: randomColor, lineThickness: randomLineThickness), HeartShape(fillColor: randomColor, lineThickness: randomLineThickness)]
+        
         return shapes
     }
     
