@@ -1,9 +1,10 @@
 import Foundation
+import SwiftUI
 
 enum CardDeck {
     case animal
     case food
-    //case shape
+    case shape
 }
 
 enum Level : String, CaseIterable {
@@ -31,27 +32,43 @@ class MemoryGameFactory {
                                "🫑", "🌽", "🥕", "🫒", "🧄", "🧅",
                                "🥔", "🍠", "🫑", "🌽"]
     
-    // let shapes: Array<Shape> []
-     
-    func createMemoryGame(chosenCardDeck: CardDeck, chosenLevel: Level, deviceHeight: CGFloat) -> MemoryGameModel<String> {
-        switch chosenCardDeck {
-        case .animal:
-            return createEmoijMemoryGame(chosenLevel: chosenLevel, emoijSet: animals, deviceHeight: deviceHeight)
-        case .food:
-            return createEmoijMemoryGame(chosenLevel: chosenLevel, emoijSet: food, deviceHeight: deviceHeight)
+    
+    func createShapes() -> Array<any Shape> {
+        let numberOfSites = Int.random(in: 1...6)
+        let shapes: Array<any Shape> = [CircleShape(), RegularPolygonShape(sides: numberOfSites), HeartShape()]
+        return shapes
+    }
+    
+    
+    func createEmoijMemoryGame(chosenCardDeck: CardDeck, chosenLevel: Level, deviceHeight: CGFloat) -> MemoryGameModel<String> {
+        if(chosenCardDeck == .animal) {
+            let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: animals.count, deviceHeight: deviceHeight)
+            
+            return MemoryGameModel<String>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
+                return animals[pairIndex]
+            })
+        }
+        else {
+            let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: food.count, deviceHeight: deviceHeight)
+                        
+            return MemoryGameModel<String>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
+                return food[pairIndex]
+            })
         }
     }
     
-    func createEmoijMemoryGame<T>(chosenLevel: Level, emoijSet: Array<T>, deviceHeight: CGFloat) -> MemoryGameModel<T> {
-        let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: emoijSet.count, deviceHeight: deviceHeight)
-        
-        return MemoryGameModel<T>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
-            return emoijSet[pairIndex]
-        })
+    /*
+    func createShapeMemoryGame(chosenCardDeck: CardDeck, chosenLevel: Level, deviceHeight: CGFloat) -> MemoryGameModel<Shape> {
+        if(chosenCardDeck == .shape) {
+            let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: createShapes().count, deviceHeight: deviceHeight)
+            
+            return MemoryGameModel<Shape>(numberOfPairsOfCards: cardPairs, cardContentFactory: { pairIndex in
+                return createShapes()[pairIndex]
+            })
+        }
     }
+     */
     
-    
-
     func getAmountOfPairs(chosenLevel: Level, cardCount: Int, deviceHeight: CGFloat) -> Int {
         var pairs: Int
         let maxAmoutOfPairs = deviceHeight / 20

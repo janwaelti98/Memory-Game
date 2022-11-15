@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 
+
+
 struct HeartShape: Shape, Equatable {
     //var fillColor: Color
     //var lineThickness: Int
@@ -87,6 +89,16 @@ struct CircleShape: Shape, Equatable {
     
     static func == (lhs: CircleShape, rhs: CircleShape) -> Bool {
         return type(of: lhs) == type(of: rhs)
+    }
+}
+
+extension Shape where Self : Equatable {
+    
+    func isEqualTo(other: any Shape) -> Bool {
+        if let o = other as? Self {
+            return self == o
+        }
+        return false
     }
 }
 

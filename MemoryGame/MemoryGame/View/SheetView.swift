@@ -24,13 +24,13 @@ struct SheetView: View {
                 
                     CardDeckMenuItem(name: "Food", icon: "🍉", color: Color.green).onTapGesture {
                         withAnimation(.easeInOut(duration: 0.6).delay(0.1)) {
-                            viewModel.startGame(chosenCardDeck: CardDeck.food, chosenLevel: chosenLevel)
+                            viewModel.startEmoijGame(chosenCardDeck: CardDeck.food, chosenLevel: chosenLevel)
                         }
                         dismiss()
                     }
                     CardDeckMenuItem(name: "Animals", icon: "🐱", color: Color.blue).onTapGesture {
                         withAnimation(.easeInOut.delay(0.1)) {
-                            viewModel.startGame(chosenCardDeck: CardDeck.animal, chosenLevel: chosenLevel)
+                            viewModel.startEmoijGame(chosenCardDeck: CardDeck.animal, chosenLevel: chosenLevel)
                         }
                         dismiss()
                     }

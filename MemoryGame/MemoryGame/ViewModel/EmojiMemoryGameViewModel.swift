@@ -5,13 +5,14 @@ class EmojiMemoryGameViewModel: ObservableObject {
     
     @Published private var model: MemoryGameModel<String>
     
-    @Published public var currentScore: Int
+    var score: Int {
+        model.score
+    }
                                                             
     private var factory = MemoryGameFactory()
 
     init() {
-        model = factory.createMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy, deviceHeight: UIScreen.main.bounds.width)
-        currentScore = factory.createMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy, deviceHeight: UIScreen.main.bounds.width).score
+        model = factory.createEmoijMemoryGame(chosenCardDeck: CardDeck.animal, chosenLevel: Level.easy, deviceHeight: UIScreen.main.bounds.width)
     }
     
     // MARK: - Access to the Model
@@ -24,7 +25,7 @@ class EmojiMemoryGameViewModel: ObservableObject {
         model.choose(card: card)
     }
     
-    func startGame(chosenCardDeck: CardDeck, chosenLevel: Level) {
-        model = factory.createMemoryGame(chosenCardDeck: chosenCardDeck, chosenLevel: chosenLevel, deviceHeight: UIScreen.main.bounds.height)
+    func startEmoijGame(chosenCardDeck: CardDeck, chosenLevel: Level) {
+        model = factory.createEmoijMemoryGame(chosenCardDeck: chosenCardDeck, chosenLevel: chosenLevel, deviceHeight: UIScreen.main.bounds.height)
     }
 }
