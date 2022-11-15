@@ -5,9 +5,8 @@ class EmojiMemoryGameViewModel: ObservableObject {
     
     @Published private var model: MemoryGameModel<String>
     
-    var score: Int {
-        model.score
-    }
+    var currentScore: Int { model.currentScore }
+    var highScore: Int { model.highScore }
                                                             
     private var factory = MemoryGameFactory()
 

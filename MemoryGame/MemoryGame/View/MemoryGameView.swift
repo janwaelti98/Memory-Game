@@ -13,7 +13,11 @@ struct MemoryGameView: View {
     
     
     var body: some View {
-        Text("Score: \(emoijViewModel.score)")
+        HStack(alignment: .center) {
+            Text("Score: \(emoijViewModel.currentScore)")
+            Spacer()
+            Text("HighScore: \(emoijViewModel.highScore)")
+        }.padding(.horizontal)
         VStack{
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: minimumColumnWidth))]) {
