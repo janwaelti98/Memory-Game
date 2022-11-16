@@ -60,8 +60,8 @@ class MemoryGameFactory {
             })
         }
     }
-    
-    /*
+
+   /*
     func createShapeMemoryGame(chosenCardDeck: CardDeck, chosenLevel: Level, deviceHeight: CGFloat) -> MemoryGameModel<Shape> {
         if(chosenCardDeck == .shape) {
             let cardPairs = getAmountOfPairs(chosenLevel: chosenLevel, cardCount: createShapes().count, deviceHeight: deviceHeight)
@@ -71,7 +71,7 @@ class MemoryGameFactory {
             })
         }
     }
-     */
+    */
     
     func getAmountOfPairs(chosenLevel: Level, cardCount: Int, deviceHeight: CGFloat) -> Int {
         var pairs: Int

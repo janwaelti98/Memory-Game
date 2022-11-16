@@ -12,9 +12,6 @@ extension Array where Element: Identifiable {
 }
 
 extension Array {
-    /*
-     wenn im Array genau ein Element, dann gib dieses Element zurück, ansonsten gib null zurück
-     */
     var only: Element? {
         count == 1 ? self.first : nil
     }

@@ -6,6 +6,9 @@ struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     @State var chosenLevel : Level = .medium
     
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.dynamicTypeSize) var typeSize
+    
     var body: some View {
         NavigationView {
             Group {
@@ -17,28 +20,29 @@ struct SheetView: View {
                         }
                     }.pickerStyle(SegmentedPickerStyle()).padding()
                 }
-                Spacer(minLength: 50)
+                Spacer(minLength: verticalSpace)
                 
                 VStack(){
                     SubTitle(title: "Card Deck")
-                
-                    CardDeckMenuItem(name: "Food", icon: "🍉", color: Color.green).onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.6).delay(0.1)) {
-                            viewModel.startEmoijGame(chosenCardDeck: CardDeck.food, chosenLevel: chosenLevel)
+                    List {
+                        CardDeckMenuItem(name: "Food", icon: "🍉").onTapGesture {
+                            withAnimation(.easeInOut(duration: 0.6).delay(0.1)) {
+                                viewModel.startEmoijGame(chosenCardDeck: CardDeck.food, chosenLevel: chosenLevel)
+                            }
+                            dismiss()
                         }
-                        dismiss()
-                    }
-                    CardDeckMenuItem(name: "Animals", icon: "🐱", color: Color.blue).onTapGesture {
-                        withAnimation(.easeInOut.delay(0.1)) {
-                            viewModel.startEmoijGame(chosenCardDeck: CardDeck.animal, chosenLevel: chosenLevel)
+                        CardDeckMenuItem(name: "Animals", icon: "🐱").onTapGesture {
+                            withAnimation(.easeInOut.delay(0.1)) {
+                                viewModel.startEmoijGame(chosenCardDeck: CardDeck.animal, chosenLevel: chosenLevel)
+                            }
+                            dismiss()
                         }
-                        dismiss()
-                    }
-                    CardDeckMenuItem(name: "Shapes", icon: "🔺", color: Color.red).onTapGesture {
-                        // TODO:
+                        CardDeckMenuItem(name: "Shapes", icon: "🔺").onTapGesture {
+                            // TODO:
+                        }
                     }
                 }
-                Spacer(minLength: 50)
+                Spacer(minLength: verticalSpace)
             }
                .navigationBarTitle(Text("New game"), displayMode: .inline)
                    .navigationBarItems(trailing: Button(action: {
@@ -53,22 +57,25 @@ struct SheetView: View {
 struct CardDeckMenuItem: View {
     var name: String
     var icon: String
-    var color: Color
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .fill(color)
-                
             HStack() {
-                Text(icon)
-                Text(name).font(.system(.title))
+                    Text(icon).font(.system(size: iconSize))
+                    Text(name).font(.system(.title2)).padding()
             }
-            .padding()
-            .multilineTextAlignment(.leading)
-        }
-        .padding(.horizontal)
-        .aspectRatio(3/1, contentMode: .fit)
+            .frame(  maxWidth: .infinity)
+            .contentShape(Rectangle())
+            .alignmentGuide(
+                            .listRowSeparatorLeading
+                        ) { dimensions in
+                            dimensions[.leading]
+                        }
+            .alignmentGuide(
+                            .listRowSeparatorTrailing
+                        ) { dimensions in
+                            dimensions[.trailing]
+                        }
+            .padding(10)
     }
 }
 
@@ -87,5 +94,6 @@ struct SubTitle: View {
 
 
 // MARK: - Drawing Constants
-let cornerRadius = 25
+let iconSize = CGFloat(50)
 let edgeLineWidth = CGFloat(1)
+let verticalSpace = CGFloat(40)

@@ -1,8 +1,6 @@
 import Foundation
 import SwiftUI
 
-
-
 struct HeartShape: Shape, Equatable {
     var fillColor: Color
     var lineThickness: Int
