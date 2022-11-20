@@ -4,10 +4,7 @@ struct MemoryGameView: View {
     
     @ObservedObject
     var emoijViewModel: EmojiMemoryGameViewModel
-    
-    @ObservedObject
-    var shapeViewModel: ShapeMemoryGameViewModel
-    
+        
     @State
     private var showingSheet = true
     
@@ -49,11 +46,10 @@ struct MemoryGameView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let emoijGame = EmojiMemoryGameViewModel()
-        let shapeGame = ShapeMemoryGameViewModel()
         
         emoijGame.choose(card: emoijGame.cards[0])
         //shapeGame.choose(card: shapeGame.cards[0])
         
-        return MemoryGameView(emoijViewModel: emoijGame, shapeViewModel: shapeGame)
+        return MemoryGameView(emoijViewModel: emoijGame)
     }
 }

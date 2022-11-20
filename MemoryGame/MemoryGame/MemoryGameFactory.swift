@@ -80,13 +80,16 @@ class MemoryGameFactory {
         switch chosenLevel {
         case .easy:
             pairs = Int(maxAmoutOfPairs / 4)
-            return pairs
         case .medium:
             pairs = Int(maxAmoutOfPairs / 3)
-            return pairs
         case .hard:
             pairs = Int(maxAmoutOfPairs / 2)
-            return pairs
         }
+        
+        if(cardCount < pairs) {
+            return cardCount
+        }
+        
+        return pairs
     }
 }

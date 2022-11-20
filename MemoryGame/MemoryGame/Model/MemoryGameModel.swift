@@ -5,7 +5,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable{
     private(set) var cards: Array<Card>
     private(set) var currentScore: Int
     private(set) var highScore: Int = UserDefaults.standard.integer(forKey: "highScore")
-    
+        
     private var indexOfFaceUpCard: Int?{
         get{
             cards.indices.filter { cards[$0].isFaceUp }.only
@@ -27,12 +27,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable{
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content{
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
-                    currentScore = currentScore + 10 + (Int)(card.bonusRemaining * 5)
-                    if(highScore <= currentScore) {
-                        highScore = currentScore
-                        UserDefaults.standard.set(highScore, forKey: "highScore")
-                    }
-                    print(currentScore)
+                    updateScore(card: card)
                 }
                 self.cards[chosenIndex].isFaceUp = true
             }
@@ -53,6 +48,18 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable{
         cards.shuffle()
     }
     
+    mutating func updateScore(card: Card) {
+
+        // Mark: - Score
+        let pointsPerMatch = 10
+        let bonusFactor = 5.0
+        
+        currentScore = currentScore + pointsPerMatch + (Int)(card.bonusRemaining * bonusFactor)
+        if(highScore <= currentScore) {
+            highScore = currentScore
+            UserDefaults.standard.set(highScore, forKey: "highScore")
+        }
+    }
     
     struct Card: Identifiable{
         var isFaceUp: Bool = false {
@@ -74,6 +81,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable{
         
         var content: CardContent
         var id: Int
+        
         
         
         // MARK: - Bonus Time

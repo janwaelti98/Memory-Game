@@ -91,8 +91,6 @@ struct SubTitle: View {
   }
 }
 
-
-
 // MARK: - Drawing Constants
 let iconSize = CGFloat(50)
 let edgeLineWidth = CGFloat(1)
